@@ -9,6 +9,7 @@ local b_rshift = bit.rshift
 local band = bit.band
 
 local realmList = {
+	{ label = "Alpha2", id = "PC", realmCode = "pc", hostName = "https://alpha2.pathofexile.com/", profileURL = "account/view-profile/" },
 	{ label = "PC", id = "PC", realmCode = "pc", hostName = "https://www.pathofexile.com/", profileURL = "account/view-profile/" },
 	{ label = "Xbox", id = "XBOX", realmCode = "xbox", hostName = "https://www.pathofexile.com/", profileURL = "account/xbox/view-profile/" },
 	{ label = "PS4", id = "SONY", realmCode = "sony", hostName = "https://www.pathofexile.com/", profileURL = "account/sony/view-profile/" },
@@ -449,8 +450,8 @@ function ImportTabClass:DownloadCharacterList()
 			self:BuildCharacterList(self.controls.charSelectLeague:GetSelValue("league"))
 			-- We only get here if the accountname was correct, found, and not private, so add it to the account history.
 			self:SaveAccountHistory()
-		end, main.POESESSID and { header = "Cookie: POESESSID=" .. main.POESESSID })
-	end, main.POESESSID and { header = "Cookie: POESESSID=" .. main.POESESSID })
+		end, main.POESESSID and { header = "Cookie: POESESSID=" .. main.POESESSID .. "; POERSESSID=" .. main.POERSESSID })
+	end, main.POESESSID and { header = "Cookie: POESESSID=" .. main.POESESSID .. "; POERSESSID=" .. main.POERSESSID })
 end
 
 function ImportTabClass:BuildCharacterList(league)
@@ -507,7 +508,7 @@ function ImportTabClass:DownloadPassiveTree()
 		end
 		self.lastCharacterHash = common.sha1(charData.name)
 		self:ImportPassiveTreeAndJewels(response.body, charData)
-	end, main.POESESSID and { header = "Cookie: POESESSID="..main.POESESSID })
+	end, main.POESESSID and { header = "Cookie: POESESSID="..main.POESESSID .. "; POERSESSID=" .. main.POERSESSID })
 end
 
 function ImportTabClass:DownloadItems()
@@ -528,7 +529,7 @@ function ImportTabClass:DownloadItems()
 		end
 		self.lastCharacterHash = common.sha1(charData.name)
 		self:ImportItemsAndSkills(response.body)
-	end, main.POESESSID and { header = "Cookie: POESESSID="..main.POESESSID })
+	end, main.POESESSID and { header = "Cookie: POESESSID="..main.POESESSID .. "; POERSESSID=" .. main.POERSESSID })
 end
 
 function ImportTabClass:ImportPassiveTreeAndJewels(json, charData)

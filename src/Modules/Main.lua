@@ -207,6 +207,7 @@ the "Releases" section of the GitHub page.]])
 	self.showWarnings = true
 	self.slotOnlyTooltips = true
 	self.POESESSID = ""
+	self.POERSESSID = ""
 
 	local ignoreBuild
 	if arg[1] then
